@@ -7,6 +7,23 @@
 // Number of vertices in the graph
 #define V 8
 
+void printgraph(int matrix[V][V])
+{
+    for(int i = 0; i< V; i++)
+    {
+        for(int j = 0; j< V; j++)
+        {
+            if(matrix[i][j] == INT_MAX)
+            {
+                printf("\t %s", "Inf");
+            }
+            else
+            printf("\t %d", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 // A utility function to find the vertex with minimum distance value, from
 // the set of vertices not yet included in shortest path tree
 int minDistance(int dist[], int sptSet[])
@@ -26,13 +43,43 @@ void printSolution(int dist[], int n)
 {
 printf("Vertex Distance from Source\n");
 for (int i = 1; i <= V; i++)
-	printf("%d \t\t %d\n", i, dist[i-1]);
+    {
+        if(dist[i-1] == INT_MAX)
+            printf("%d \t\t %s\n", i, "Inf");
+        else
+            
+        printf("%d \t\t %d\n", i, dist[i-1]);
+    }
+	
 }
 
 // Funtion that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
-void dijkstra(int graph[V][V], int src)
+void dijkstra(int graph_org[V][V], int src, int exits[V])
 {
+    
+    int graph[V][V];
+
+    for (int i =0;i< V;i++)
+    {
+        for(int j = 0; j< V;j++)
+       {
+            if(  (exits[i] == 1 && i != src) ||  (exits[j] == 1 && j!=src))
+            {
+                
+                graph[i][j] =INT_MAX;  
+                
+            }
+            else
+            {
+                graph[i][j]=  graph_org[i][j];           
+            }
+       }
+  
+    }
+
+    printgraph(graph);
+
 	int dist[V];	 // The output array. dist[i] will hold the shortest
 					// distance from src to i
 
@@ -71,7 +118,7 @@ void dijkstra(int graph[V][V], int src)
 			{
 			    dist[v] = dist[u] + graph[u][v];
 			}
-		printSolution(dist, V);
+		
 		}
 	}
 
@@ -107,8 +154,9 @@ int graph[V][V] = {{INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 4, INT_MAX, INT
 
 //int graph[V][V] = {{0,100,200,50}, {INT_MAX, 0,75,INT_MAX},{INT_MAX,INT_MAX,0,INT_MAX},{INT_MAX,45,85,0}};
 
-    int exits[]={1,1,0,0,0,0,0,0};
-	dijkstra(graph, 0);
+    int exits[]={1,1,0,0,0,0,0,0};  
+	dijkstra(graph, 0, exits);
+//	dijkstra(graph, 1, exits);
 	//dijkstra(graph, 1);
 
 	return 0;
