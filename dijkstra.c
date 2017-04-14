@@ -6,6 +6,7 @@
 
 // Number of vertices in the graph
 #define V 8
+#define E 2
 
 void printgraph(int matrix[V][V])
 {
@@ -38,6 +39,40 @@ for (int v = 0; v < V; v++)
 return min_index;
 }
 
+
+int calculate_cost(int exit_choices[V][E], int final_matrix[V][E])
+{
+
+    printf("\nIn cost fucntion; Exit choicex, final mat");
+     for (int i = 0; i< V; i++)
+    {
+        for(int j = 0; j< E;j++)
+            printf("\t %d",exit_choices[i][j]);
+        printf("\n");
+    }
+    
+     for (int i = 0; i< V; i++)
+    {
+        for(int j = 0; j< E;j++)
+            printf("\t %d",final_matrix[i][j]);
+        printf("\n");
+    }
+    
+    int cost = 0;
+    for(int i =0 ;i< V; i++)
+    {
+        for(int j = 0; j< E; j++)
+        {
+            cost+=(exit_choices[i][j]* final_matrix[i][j]);
+            printf("\n %d", cost);
+        }
+            
+    }
+    return cost;
+
+}
+
+
 // A utility function to print the constructed distance array
 void printSolution(int dist[], int n)
 {
@@ -55,7 +90,7 @@ for (int i = 1; i <= V; i++)
 
 // Funtion that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
-void dijkstra(int graph_org[V][V], int src, int exits[V])
+void dijkstra(int graph_org[V][V], int src, int exits[V], int *dist)
 {
     
     int graph[V][V];
@@ -80,7 +115,7 @@ void dijkstra(int graph_org[V][V], int src, int exits[V])
 
     printgraph(graph);
 
-	int dist[V];	 // The output array. dist[i] will hold the shortest
+		 // The output array. dist[i] will hold the shortest
 					// distance from src to i
 
 	int sptSet[V]; // sptSet[i] will true if vertex i is included in shortest
@@ -123,7 +158,7 @@ void dijkstra(int graph_org[V][V], int src, int exits[V])
 	}
 
 	// print the constructed distance array
-	printSolution(dist, V);
+	//printSolution(dist, V);
 }
 
 // driver program to test above function
@@ -155,7 +190,83 @@ int graph[V][V] = {{INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 4, INT_MAX, INT
 //int graph[V][V] = {{0,100,200,50}, {INT_MAX, 0,75,INT_MAX},{INT_MAX,INT_MAX,0,INT_MAX},{INT_MAX,45,85,0}};
 
     int exits[]={1,1,0,0,0,0,0,0};  
-	dijkstra(graph, 0, exits);
+    int dist[V];
+    int final_matrix[V][E];
+    int exit_choices[V][E];
+    int max_capacities[E];
+    
+    printf("\nMax capacities\n");
+    for(int i = 0;i< E; i++)
+    
+    {
+        max_capacities[i] = (V*1.4)/E;
+        printf("\t %d",max_capacities[i]);
+    }
+    
+    
+    
+    for (int i = 0; i< V; i++)
+    {
+        for(int j = 0; j< E;j++)
+        {
+            final_matrix[i][j] = 0;
+            exit_choices[i][j] = 0;
+        }
+    }
+    
+    
+//    #pragma omp parallel for
+    for(int i = 0; i< 2; i++)
+    {
+        printf("\n %d", i);
+        dijkstra(graph, i, exits, dist);
+        
+        for (int j =0 ;j< V;j++)
+        {
+            final_matrix[j][i] = dist[j];
+        
+        }
+
+        printSolution(dist, V);
+    }
+	
+	
+//     for (int i = 0; i< V; i++)
+//     {
+//         for(int j = 0; j< E;j++)
+//             printf("\t %d",final_matrix[i][j]);
+//         printf("\n");
+//     }
+        
+	
+	for(int i = 0; i< V; i++)
+	{
+	    int min_dist = INT_MAX;
+	    int min_index  = 0;
+	    for(int j = 0;j< E; j++)
+	    {
+	        if(final_matrix[i][j]< min_dist)
+	        {
+	            min_dist = final_matrix[i][j];
+	            min_index = j;
+	        }
+	      
+	    }
+	    
+	      exit_choices[i][min_index] = 1;
+	      
+	}
+	
+    for (int i = 0; i< V; i++)
+    {
+        for(int j = 0; j< E;j++)
+            printf("\t %d",exit_choices[i][j]);
+        printf("\n");
+    }
+    
+    
+	printf("\nCost %d\n",calculate_cost(exit_choices, final_matrix));
+	
 //	dijkstra(graph, 1, exits);
 	//dijkstra(graph, 1);
 
