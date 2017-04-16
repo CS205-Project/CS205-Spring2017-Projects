@@ -17,5 +17,6 @@ The above algorithm is sequential and calculates the shorted distance using Dijk
 
 Preliminary results:
 The following plot shows how long the sequential algorithm took to calculate shortest paths for everyone and apply the simulated annealing technique for graphs of sizes 500, 5000, and 10000 (i.e. the number of people that are evacuated):
+
 ![alt tag](https://raw.githubusercontent.com/CS205-Project/CS205-Spring2017-Projects/master/sequentialEvacuationTime.png)
 
