@@ -12,10 +12,13 @@
 #include <math.h>
 
 // Number of vertices in the graph
-#define V 8
+#define V 500
+#define NUME 50000
 #define E 2
 #define HPENALTY 100
 #define LPENALTY 2
+
+#define PRINT 0
 
 void printgraph(int matrix[V][V])
 {
@@ -52,19 +55,19 @@ return min_index;
 float calculate_cost(int exit_choices[V][E], int final_matrix[V][E], int exits[], int max_capacities[])
 {
 
-    printf("\nIn cost fucntion; Exit choicex, final mat\n");
+    if (PRINT) printf("\nIn cost fucntion; Exit choicex, final mat\n");
      for (int i = 0; i< V; i++)
     {
         for(int j = 0; j< E;j++)
-            printf("\t %d",exit_choices[i][j]);
-        printf("\n");
+            if (PRINT) printf("\t %d",exit_choices[i][j]);
+        if (PRINT) printf("\n");
     }
-    printf("\nIn cost fucntion; Exit choicex, final mat\n");
+   if (PRINT)  printf("\nIn cost fucntion; Exit choicex, final mat\n");
      for (int i = 0; i< V; i++)
     {
         for(int j = 0; j< E;j++)
-            printf("\t %d",final_matrix[i][j]);
-        printf("\n");
+            if (PRINT) printf("\t %d",final_matrix[i][j]);
+        if (PRINT) printf("\n");
     }
     
     float cost = 0;
@@ -96,7 +99,7 @@ float calculate_cost(int exit_choices[V][E], int final_matrix[V][E], int exits[]
             }
         }
         
-        printf("\nExisting cap %d", existing_capacities[i]);
+        if (PRINT) printf("\nExisting cap %d", existing_capacities[i]);
     }
 
     for(int i = 0; i< E;i++)
@@ -210,7 +213,7 @@ void dijkstra(int graph_org[V][V], int src, int exits[V], int final_matrix[V][E]
 	
 	for (int j =0 ;j< V;j++)
         {
-            printf(" %d ", src);
+            if (PRINT) printf(" %d ", src);
             final_matrix[j][src] = dist[j];
         
         }
@@ -218,114 +221,117 @@ void dijkstra(int graph_org[V][V], int src, int exits[V], int final_matrix[V][E]
 }
 
 // driver program to test above function
-int main()
-{
-/* Let us create the example graph discussed above */
-// int graph[V][V] = {{0, 4, 0, 0, 0, 0, 0, 8, 0},
-// 					{4, 0, 8, 0, 0, 0, 0, 11, 0},
-// 					{0, 8, 0, 7, 0, 4, 0, 0, 2},
-// 					{0, 0, 7, 0, 9, 14, 0, 0, 0},
-// 					{0, 0, 0, 9, 0, 10, 0, 0, 0},
-// 					{0, 0, 4, 14, 10, 0, 2, 0, 0},
-// 					{0, 0, 0, 0, 0, 2, 0, 1, 6},
-// 					{8, 11, 0, 0, 0, 0, 1, 0, 7},
-// 					{0, 0, 2, 0, 0, 0, 6, 7, 0}
-// 					};
+int main() {
+	/* Let us create the example graph discussed above */
+	// int graph[V][V] = {{0, 4, 0, 0, 0, 0, 0, 8, 0},
+	// 					{4, 0, 8, 0, 0, 0, 0, 11, 0},
+	// 					{0, 8, 0, 7, 0, 4, 0, 0, 2},
+	// 					{0, 0, 7, 0, 9, 14, 0, 0, 0},
+	// 					{0, 0, 0, 9, 0, 10, 0, 0, 0},
+	// 					{0, 0, 4, 14, 10, 0, 2, 0, 0},
+	// 					{0, 0, 0, 0, 0, 2, 0, 1, 6},
+	// 					{8, 11, 0, 0, 0, 0, 1, 0, 7},
+	// 					{0, 0, 2, 0, 0, 0, 6, 7, 0}
+	// 					};
+	
+	/* Let us create the example graph discussed above */
+	//int graph[V][V] = {{INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 4, INT_MAX, INT_MAX},
+	//                   {INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 6},
+	//                   {INT_MAX, INT_MAX, INT_MAX, 6, 7, 3, INT_MAX, INT_MAX},
+	//                   {INT_MAX, INT_MAX, 6, INT_MAX, 1, INT_MAX, INT_MAX, INT_MAX},
+	//                   {INT_MAX, INT_MAX, 7, 1, INT_MAX, 2, INT_MAX, 7},
+	//                   {4, INT_MAX, 3, INT_MAX, 2, INT_MAX, 5, INT_MAX},
+	//                   {INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 5, INT_MAX, INT_MAX},
+	//                   {INT_MAX, 6, INT_MAX, INT_MAX, 7, INT_MAX, INT_MAX, INT_MAX}};
+	//
 
-/* Let us create the example graph discussed above */
-int graph[V][V] = {{INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 4, INT_MAX, INT_MAX},
-                   {INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 6},
-                   {INT_MAX, INT_MAX, INT_MAX, 6, 7, 3, INT_MAX, INT_MAX},
-                   {INT_MAX, INT_MAX, 6, INT_MAX, 1, INT_MAX, INT_MAX, INT_MAX},
-                   {INT_MAX, INT_MAX, 7, 1, INT_MAX, 2, INT_MAX, 7},
-                   {4, INT_MAX, 3, INT_MAX, 2, INT_MAX, 5, INT_MAX},
-                   {INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 5, INT_MAX, INT_MAX},
-                   {INT_MAX, 6, INT_MAX, INT_MAX, 7, INT_MAX, INT_MAX, INT_MAX}};
+	int graph[V][V];
 
+	// Assign INT_MAX to all edges in adjacency graph:
+	for (int i = 0; i < V; i++) {
+		for (int j = 0; j < V; j++) {
+			graph[i][j] = i==j ? 0 : INT_MAX;
+		}
+	}
 
-// int graph[V][V];
-// char str[999];
-// FILE * file;
-// printf("\n Graph \n");
-// file = fopen( "hello_graph.txt" , "r");
-//     
-//     for(int i = 0; i< V; i++)
-//     {
-//         for(int j = 0; j<V;j ++)
-//         {
-//             fscanf(file, "%s", str);
-//             if(strcmp("INT_MAX,", str)==0)
-//                 {
-//                     printf("\t%s", "Inf");
-//                     graph[i][j] = INT_MAX;
-//                 
-//                 }
-//             else
-//             {
-//                 int a = atoi(str);
-//                 printf("\t%d, ",a);
-//                 graph[i][j] = a;    
-//             }
-//         }
-//         printf("\n");
-//     
-//     }
+	//printgraph(graph);
+     	char str[999];
+     	FILE * file;
+     	if (PRINT) printf("\n Graph \n");
+     	file = fopen( "g.txt" , "r");
+     
+     	// Ignore first lines:
+     	fscanf(file, "%s", str);
+     	fscanf(file, "%s", str);
 
-//int graph[V][V] = {{0,100,200,50}, {INT_MAX, 0,75,INT_MAX},{INT_MAX,INT_MAX,0,INT_MAX},{INT_MAX,45,85,0}};
-printgraph(graph);
-    int exits[V];
-    for (int i = 0; i< 2; i++)
-    exits[i] =1;
-    int dist[V];
-    int final_matrix[V][E];
-    int exit_choices[V][E];
-    int max_capacities[E];
+	int V1, V2, w;
+     
+     	for(int i = 0; i< NUME; i++) {
+		char temp;
+	
+		// Read in V1, V2, w:
+		fscanf(file, "%i", &V1);
+		fscanf(file, "%i", &V2);
+		fscanf(file, "%i", &w);
+
+		if (w < graph[V1-1][V2-1]) {
+			graph[V1-1][V2-1] = w;
+		}
+     	}
+
+	// Print matrix;
+	//printgraph(graph);
+
+	//int graph[V][V] = {{0,100,200,50}, {INT_MAX, 0,75,INT_MAX},{INT_MAX,INT_MAX,0,INT_MAX},{INT_MAX,45,85,0}};
+	//printgraph(graph);
+    	int exits[V];
+    	for (int i = 0; i< 2; i++)
+    		exits[i] =1;
+    	
+	int dist[V];
+    	int final_matrix[V][E];
+    	int exit_choices[V][E];
+    	int max_capacities[E];
     
-    printf("\nMax capacities\n");
-    for(int i = 0;i< E; i++)
-    
-    {
-        max_capacities[i] = ((V-E)*1.4)/E;
-        printf("\t %d",max_capacities[i]);
-    }
+    	if (PRINT) printf("\nMax capacities\n");
+    	for(int i = 0;i< E; i++) {
+        	max_capacities[i] = ((V-E)*1.4)/E;
+        	if (PRINT) printf("\t %d",max_capacities[i]);
+    	}
     
     
-    
-    for (int i = 0; i< V; i++)
-    {
-        for(int j = 0; j< E;j++)
-        {
-            final_matrix[i][j] = 0;
-            exit_choices[i][j] = 0;
-        }
-    }
+    	for (int i = 0; i< V; i++) {
+        	for(int j = 0; j< E;j++) {
+            		final_matrix[i][j] = 0;
+            		exit_choices[i][j] = 0;
+        	}
+   	 }
     
         struct timeval time_start;
-		struct timeval time_end;
+	struct timeval time_end;
         long long execution_time;
-		gettimeofday(&time_start, NULL);
+	gettimeofday(&time_start, NULL);
   
   
-   // #pragma omp parallel for
-    for(int i = 0; i< E; i++)
-    {
-        //printf("\n %d", i);
-        dijkstra(graph, i, exits, final_matrix);
+   	// #pragma omp parallel for
+    	for(int i = 0; i< E; i++) {
+	        //printf("\n %d", i);
+        	dijkstra(graph, i, exits, final_matrix);
         
-       //  for (int j =0 ;j< V;j++)
-//         {
-//             printf(" %d ", i);
-//             final_matrix[j][i] = dist[j];
-//         
-//         }
+       	//  for (int j =0 ;j< V;j++)
+	//         {
+	//             printf(" %d ", i);
+	//             final_matrix[j][i] = dist[j];
+	//         
+	//         }
 
         //printSolution(dist, V);
-    }
+    	}
     
 	gettimeofday(&time_end, NULL);
         execution_time = 1000000LL  * (time_end.tv_sec  - time_start.tv_sec) + (time_end.tv_usec - time_start.tv_usec);
        //printf("\n ENd %d %d", time_end.tv_sec, time_start.tv_sec);
-			printf("\nTime: %lld\n", execution_time);
+		 printf("\nTime: %lld\n", execution_time);
 	
 //     for (int i = 0; i< V; i++)
 //     {
@@ -335,26 +341,17 @@ printgraph(graph);
 //     }
         
 	
-	for(int i = 0; i< V; i++)
-	{
-	    int min_dist = INT_MAX;
-	    int min_index  = 0;
-	    for(int j = 0;j< E; j++)
-	    {
-	        if(final_matrix[i][j]< min_dist)
-	        {
-	            min_dist = final_matrix[i][j];
-	            min_index = j;
-	        }
-	      
-	    }
-	    
-	      exit_choices[i][min_index] = 1;
-	      
+	for(int i = 0; i< V; i++){
+		int min_dist = INT_MAX;
+		int min_index  = 0;
+		for(int j = 0;j< E; j++) {
+	        	if(final_matrix[i][j]< min_dist) {
+	            		min_dist = final_matrix[i][j];
+	            		min_index = j;
+	       	 	}
+	    	}
+	      	exit_choices[i][min_index] = 1;
 	}
-	
-	
-	
 	
 	
     // for (int i = 0; i< V; i++)
@@ -365,7 +362,7 @@ printgraph(graph);
 //     }
 //     
 float best_cost = calculate_cost(exit_choices, final_matrix, exits, max_capacities);    
-	printf("\nNew Cost %f\n",best_cost);
+	if (PRINT) printf("\nNew Cost %f\n",best_cost);
 	
 	
 float old_cost = best_cost;	
@@ -382,9 +379,9 @@ for (int epoch = 0; epoch< 30; epoch++)
     {
         /* new slution*/
         node  = rand() % 8 +2;
-        printf("%d",node);
+        if (PRINT) printf("%d",node);
         exit_r = rand() % 2;
-        printf("%d",exit_r);
+        if (PRINT) printf("%d",exit_r);
 
 
         for (int i = 0; i< E; i++)
@@ -402,11 +399,11 @@ for (int epoch = 0; epoch< 30; epoch++)
         
         float prob = ((float)rand()/(float)(RAND_MAX)) * 1;
         
-        printf("\nNew Cost %f\n",new_cost);
+        if (PRINT) printf("\nNew Cost %f\n",new_cost);
         //printf(" prob %f  \n" , exp( (old_cost-new_cost) /T));
         if( new_cost < old_cost ||  prob < exp( (old_cost-new_cost) /T) )
         {
-            printf("\n New solution accepted");
+            if (PRINT) printf("\n New solution accepted");
             old_cost = new_cost;
             best_cost = new_cost;
         }
@@ -415,7 +412,7 @@ for (int epoch = 0; epoch< 30; epoch++)
         {
             exit_choices[node][exit_r] = 0;
             exit_choices[node][old_index] = 1;
-            printf("\n New solution rejected");
+            if (PRINT) printf("\n New solution rejected");
         }
         
     }
@@ -424,6 +421,6 @@ for (int epoch = 0; epoch< 30; epoch++)
 }
 // Simulated Annealing ends here //
 
-	printf("\n Best solutoin %f", best_cost);
+	printf("\n Best solutoin %f\n", best_cost);
 	return 0;
 }
