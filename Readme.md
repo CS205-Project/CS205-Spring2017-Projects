@@ -15,4 +15,8 @@ Once we have this assignment, we use simulated annealing to find the min. cost c
 
 The above algorithm is sequential and calculates the shorted distance using Dijkstra one by one. Since Dijkstra from one exit is not affected by another exit, we parallelize the algorithm by using openmp to calculate the shortest distance from all exits in parallel. This speeds up the process of calculation of shortest distance. Similarly, for simulated annealing, instead of starting with 1 initial configuration, we start with multiple initial configurations in  parallel and take the best solution at the end. 
 
+Preliminary results:
+The following plot shows how long the sequential algorithm took to calculate shortest paths for everyone and apply the simulated annealing technique for graphs of sizes 500, 5000, and 10000 (i.e. the number of people that are evacuated):
+
+![alt tag](https://raw.githubusercontent.com/CS205-Project/CS205-Spring2017-Projects/master/sequentialEvacuationTime.png)
 
