@@ -8,6 +8,7 @@
 #include <limits.h>
 #include <string.h>
 // Number of vertices in the graph
+
 #define V 10
 #define E 2
 #define HPENALTY 100

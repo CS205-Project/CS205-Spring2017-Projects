@@ -251,6 +251,7 @@ int main() {
 
 		if (w < graph[V1-1][V2-1]) {
 			graph[V1-1][V2-1] = w;
+			graph[V2-1][V1-1] = w;
 		}
      	}
 
