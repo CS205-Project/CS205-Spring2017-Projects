@@ -12,9 +12,9 @@
 #include <math.h>
 
 // Number of vertices in the graph
-#define V 10000
-#define NUME 100000
-#define E 20
+#define V 15000
+#define NUME 75000
+#define E 50
 #define HPENALTY 100
 #define LPENALTY 2
 
@@ -140,33 +140,10 @@ for (int i = 1; i <= V; i++)
 
 // Funtion that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
-void dijkstra(int graph_org[V][V], int src, int exits[V], int final_matrix[V][E])
+void dijkstra(int graph[V][V], int src, int exits[V], int final_matrix[V][E])
 {
-    
-    int graph[V][V];
-
-    for (int i =0;i< V;i++)
-    {
-        for(int j = 0; j< V;j++)
-       {
-            if(  (exits[i] == 1 && i != src) ||  (exits[j] == 1 && j!=src))
-            {
-                
-                graph[i][j] =INT_MAX;  
-                
-            }
-            else
-            {
-                graph[i][j]=  graph_org[i][j];           
-            }
-       }
-  
-    }
-
-   // printgraph(graph);
-
-		 // The output array. dist[i] will hold the shortest
-					// distance from src to i
+	// The output array. dist[i] will hold the shortest
+	// distance from src to i
 
 	int sptSet[V]; // sptSet[i] will true if vertex i is included in shortest
 					// path tree or shortest distance from src to i is finalized
@@ -190,7 +167,9 @@ void dijkstra(int graph_org[V][V], int src, int exits[V], int final_matrix[V][E]
 	sptSet[u] = 1;
 
 	// Update dist value of the adjacent vertices of the picked vertex.
-	for (int v = 0; v < V; v++)
+	for (int v = 0; v < V; v++) {
+		// Don't look at other exit vertices:
+		if (exits[v] == 1 && v != src) continue;		
 
 		// Update dist[v] only if is not in sptSet, there is an edge from 
 		// u to v, and total weight of path from src to v through u is 
@@ -207,7 +186,7 @@ void dijkstra(int graph_org[V][V], int src, int exits[V], int final_matrix[V][E]
 		
 		}
 	}
-
+	}
 	// print the constructed distance array
 	//printSolution(dist, V);
 	
@@ -215,9 +194,7 @@ void dijkstra(int graph_org[V][V], int src, int exits[V], int final_matrix[V][E]
         {
             if (PRINT) printf(" %d ", src);
             final_matrix[j][src] = dist[j];
-        
         }
-	
 }
 
 // driver program to test above function
@@ -311,9 +288,8 @@ int main() {
 	gettimeofday(&time_start, NULL);
   
   
-   	//#pragma omp parallel for
+   	#pragma omp parallel for
     	for(int i = 0; i< E; i++) {
-	        //printf("\n %d", i);
         	dijkstra(graph, i, exits, final_matrix);
         
        	//  for (int j =0 ;j< V;j++)
