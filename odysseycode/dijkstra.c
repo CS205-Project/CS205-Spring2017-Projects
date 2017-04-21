@@ -13,8 +13,14 @@
 
 // Number of vertices in the graph
 #define V 15000
+
+// Number of edges in the graph
 #define NUME 75000
+
+// Number of exits:
 #define E 50
+
+// Penalties:
 #define HPENALTY 100
 #define LPENALTY 2
 
@@ -41,14 +47,14 @@ void printgraph(int matrix[V][V])
 // the set of vertices not yet included in shortest path tree
 int minDistance(int dist[], int sptSet[])
 {
-// Initialize min value
-int min = INT_MAX, min_index;
-
-for (int v = 0; v < V; v++)
-	if (sptSet[v] == 0 && dist[v] <= min)
-		min = dist[v], min_index = v;
-
-return min_index;
+	// Initialize min value
+	int min = INT_MAX, min_index;
+	
+	for (int v = 0; v < V; v++)
+		if (sptSet[v] == 0 && dist[v] <= min)
+			min = dist[v], min_index = v;
+	
+	return min_index;
 }
 
 
@@ -126,14 +132,14 @@ float calculate_cost(int exit_choices[V][E], int final_matrix[V][E], int exits[]
 // A utility function to print the constructed distance array
 void printSolution(int dist[], int n)
 {
-printf("Vertex Distance from Source\n");
-for (int i = 1; i <= V; i++)
-    {
-        if(dist[i-1] == INT_MAX)
-            printf("%d \t\t %s\n", i, "Inf");
-        else
+	printf("Vertex Distance from Source\n");
+	for (int i = 1; i <= V; i++)
+   	{
+        	if(dist[i-1] == INT_MAX)
+            		printf("%d \t\t %s\n", i, "Inf");
+        	else
             
-        printf("%d \t\t %d\n", i, dist[i-1]);
+        	printf("%d \t\t %d\n", i, dist[i-1]);
     }
 	
 }
@@ -242,13 +248,15 @@ int main() {
      	fscanf(file, "%s", str);
 
 	int V1, V2, w;
-     
+
+	// Fill in adjacency matrix:     
      	for(int i = 0; i< NUME; i++) {
 		// Read in V1, V2, w:
 		fscanf(file, "%i", &V1);
 		fscanf(file, "%i", &V2);
 		fscanf(file, "%i", &w);
 
+		// If weight of edge is less than any previous read weight update it:
 		if (w < graph[V1-1][V2-1]) {
 			graph[V1-1][V2-1] = w;
 			graph[V2-1][V1-1] = w;
@@ -258,12 +266,14 @@ int main() {
 	// Print matrix;
 	//printgraph(graph);
 
-	//int graph[V][V] = {{0,100,200,50}, {INT_MAX, 0,75,INT_MAX},{INT_MAX,INT_MAX,0,INT_MAX},{INT_MAX,45,85,0}};
+	//int graph[V][V] = {{0,100,200,50}, {INT_MAX, 0,75,INT_MAX},
+	//{INT_MAX,INT_MAX,0,INT_MAX},{INT_MAX,45,85,0}};
 	//printgraph(graph);
-    	int exits[V];
+    	
+	int exits[V];
     	for (int i = 0; i< E; i++)
     		exits[i] = 1;
-    	
+	
 	int dist[V];
     	int final_matrix[V][E];
     	int exit_choices[V][E];
@@ -309,12 +319,12 @@ int main() {
        //printf("\n ENd %d %d", time_end.tv_sec, time_start.tv_sec);
 		 printf("\nTime: %lld %llds\n", execution_time, execution_time/1000000);
 	
-//     for (int i = 0; i< V; i++)
-//     {
-//         for(int j = 0; j< E;j++)
-//             printf("\t %d",final_matrix[i][j]);
-//         printf("\n");
-//     }
+	//     for (int i = 0; i< V; i++)
+	//     {
+	//         for(int j = 0; j< E;j++)
+	//             printf("\t %d",final_matrix[i][j]);
+	//         printf("\n");
+	//     }
         
 	
 	for(int i = 0; i< V; i++){
@@ -330,72 +340,71 @@ int main() {
 	}
 	
 	
-    // for (int i = 0; i< V; i++)
-//     {
-//         for(int j = 0; j< E;j++)
-//             printf("\t %d",exit_choices[i][j]);
-//         printf("\n");
-//     }
-//     
-float best_cost = calculate_cost(exit_choices, final_matrix, exits, max_capacities);    
-	if (PRINT) printf("\nNew Cost %f\n",best_cost);
+	// for (int i = 0; i< V; i++)
+	//     {
+	//         for(int j = 0; j< E;j++)
+	//             printf("\t %d",exit_choices[i][j]);
+	//         printf("\n");
+	//     }
+	//     
+	float best_cost = calculate_cost(exit_choices, final_matrix, exits, max_capacities);    
+		if (PRINT) printf("\nNew Cost %f\n",best_cost);
+		
+		
+	float old_cost = best_cost;	
+	
+	// Simulated Annealing //
+	int node, exit_r, old_index;
+	float T = 100;
+	float new_cost;
+	
+	for (int epoch = 0; epoch< 30; epoch++)
+	{
+	    for (int l = 0;l < 10;l++)
+	    {
+	        /* new slution*/
+	        node  = rand() % 8 +2;
+	        if (PRINT) printf("%d",node);
+	        exit_r = rand() % 2;
+	        if (PRINT) printf("%d",exit_r);
 	
 	
-float old_cost = best_cost;	
-// Simulated Annealing //
-int node, exit_r, old_index;
-float T = 100;
-float new_cost;
-
-for (int epoch = 0; epoch< 30; epoch++)
-{
-    
-    
-    for (int l = 0;l < 10;l++)
-    {
-        /* new slution*/
-        node  = rand() % 8 +2;
-        if (PRINT) printf("%d",node);
-        exit_r = rand() % 2;
-        if (PRINT) printf("%d",exit_r);
-
-
-        for (int i = 0; i< E; i++)
-        {
-            if(exit_choices[node][i] == 1)
-                {
-                old_index = i;
-                exit_choices[node][i] = 0;
-                break;
-                }
-        }
-        exit_choices[node][exit_r] = 1;
-        
-        new_cost = calculate_cost(exit_choices, final_matrix, exits, max_capacities);
-        
-        float prob = ((float)rand()/(float)(RAND_MAX)) * 1;
-        
-        if (PRINT) printf("\nNew Cost %f\n",new_cost);
-        //printf(" prob %f  \n" , exp( (old_cost-new_cost) /T));
-        if( new_cost < old_cost ||  prob < exp( (old_cost-new_cost) /T) )
-        {
-            if (PRINT) printf("\n New solution accepted");
-            old_cost = new_cost;
-            best_cost = new_cost;
-        }
-        
-        else
-        {
-            exit_choices[node][exit_r] = 0;
-            exit_choices[node][old_index] = 1;
-            if (PRINT) printf("\n New solution rejected");
-        }
-        
-    }
-    T = T *0.8;
-    
-}
-// Simulated Annealing ends here //
+	        for (int i = 0; i< E; i++)
+	        {
+	            if(exit_choices[node][i] == 1)
+	                {
+	                old_index = i;
+	                exit_choices[node][i] = 0;
+	                break;
+	                }
+	        }
+	        exit_choices[node][exit_r] = 1;
+	        
+	        new_cost = calculate_cost(exit_choices, final_matrix, exits, max_capacities);
+	        
+	        float prob = ((float)rand()/(float)(RAND_MAX)) * 1;
+	        
+	        if (PRINT) printf("\nNew Cost %f\n",new_cost);
+	        //printf(" prob %f  \n" , exp( (old_cost-new_cost) /T));
+	        if( new_cost < old_cost ||  prob < exp( (old_cost-new_cost) /T) )
+	        {
+	            if (PRINT) printf("\n New solution accepted");
+	            old_cost = new_cost;
+	            best_cost = new_cost;
+	        }
+	        
+	        else
+	        {
+	            exit_choices[node][exit_r] = 0;
+	            exit_choices[node][old_index] = 1;
+	            if (PRINT) printf("\n New solution rejected");
+	        }
+	        
+	    }
+	    T = T *0.8;
+	    
+	}
+	// Simulated Annealing ends here //
 
 	printf("\n Best solutoin %f\n", best_cost);
 	return 0;
