@@ -10,15 +10,27 @@
 #include <sys/time.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
 
 // Number of vertices in the graph
-#define V 15000
+#define V 500
 
 // Number of edges in the graph
-#define NUME 75000
+#define NUME 2500
 
 // Number of exits:
 #define E 50
+
+#define fori(a,b) for(int i=a;i<b;i++)
+#define forj(a,b) for(int j=a;j<b;j++)
+#define fork(a,b) for(int k=a;k<b;k++)
+
+
+#define MAX(a,b) (((a)>(b))?(a):(b))
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
+#define INF (1<<31)-1 // Max unsigned
+
 
 // Penalties:
 #define HPENALTY 100
@@ -144,6 +156,160 @@ void printSolution(int dist[], int n)
 	
 }
 
+// APSP code: ////////////////////////////////////////////////////////////////////////////////////
+
+// Multiplies submatrixes A and B into C which is a submatrix of D: 
+// When boolean variable min is set it first checks if the values in C are
+// less than the values in D, and updates them accordingly. (Only used for
+// matrices in the form A11 and A22):
+
+int submult(int D[][V], int n, int A_x1, int A_y1, int B_x1, int B_y1, int C_x1, int C_y1, bool min) {
+	//printf("\n\nInside submult with n = %i, A(%i,%i), B(%i,%i), C(%i,%i)\n", n, A_y1, A_x1, B_y1, B_x1, C_y1, C_x1);
+
+	// Build new temp matrix C:
+	int **C = (int **)malloc(n*sizeof(int *));
+	fori(0,n) C[i] = (int *)malloc(n * sizeof(int));
+
+	fori(0,n) { // n
+		forj(0,n) { // p
+			int sum = INF;
+
+			fork(0,n) { // m
+				//printf("Adding A[%i][%i]=%i and A[%i][%i]=%i\n",i+A_y1, k+A_x1, A[i+A_y1][k+A_x1], k+B_y1, j+B_x1,A[k+B_y1][j+B_x1]);
+				int val1 = D[i+A_y1][k+A_x1];
+				int val2 = D[k+B_y1][j+B_x1];
+
+				int mult;
+				if (val1 == INF || val2 == INF) {
+					mult = INF;
+				} else {
+					mult = val1 + val2;
+				}
+				if (mult < sum) sum = mult;
+			}
+			//printf("Assigning C[%i][%i]=%i\n", i,j,sum);
+			C[i][j] = sum;
+		}
+	}
+
+	// Assign newly calculated matrix to it's place in A:
+	fori(0,n) {
+		forj(0,n) {
+			//printf("Modifying D[%i][%i] with C[%i][%i]-- n=%i\n", j+C_y1, i+C_x1, i, j,n);
+			//fflush(stdout);
+
+			// If min is set then we will only update lengths if they are lower:
+			if (!min) {
+				D[i+C_y1][j+C_x1] = C[i][j];
+			} else {
+				if (C[i][j] < D[i+C_y1][j+C_x1]) {
+					// Length is lower so update length:
+					D[i+C_y1][j+C_x1] = C[i][j];
+				} 
+			}
+		}
+	}
+
+	//printf("\n\n");
+	// Free C:
+	fori(0,n) {
+		free(C[i]);
+	}
+	free(C);
+}
+
+// (x_1, y_1) is the location of the upper left corner of the matrix
+// (x_2, y_2) is the location of the lower right corner of the matrix
+void APSP(int A[][V], int n, int x1, int y1, int x2, int y2) {
+	//printf("Calling APSP with n=%i and coordinates (%i,%i), (%i,%i)\n", n, y1, x1, y2, x2);
+
+	// Step 1:
+	if (n==1) return;
+
+	// Step 2:
+	// Partition A into:
+	// A11 A12
+	// A21 A22
+	
+	int x_mid = (x1 + x2) / 2;
+	int y_mid = (y1 + y2) / 2;
+
+	int A11_x1 = x1;
+	int A11_y1 = y1;
+	int A11_x2 = x_mid;
+	int A11_y2 = y_mid;
+
+	int A12_x1 = x_mid+1;
+	int A12_y1 = y1;
+	int A12_x2 = x2;
+	int A12_y2 = y_mid;
+
+	int A21_x1 = x1;
+	int A21_y1 = y_mid+1;
+	int A21_x2 = x_mid;
+	int A21_y2 = y2;
+
+	int A22_x1 = x_mid+1;
+	int A22_y1 = y_mid+1;
+	int A22_x2 = x2;
+	int A22_y2 = y2;
+
+	// Step 3:
+	// Recurse on A11:
+	APSP(A, n/2, A11_x1, A11_y1, A11_x2, A11_y2);
+
+	#pragma omp parallel for
+	for (int i = 0; i < 3; i++) {
+
+	// Step 4:
+	// Propagate paths from V1 to V2:
+	// A12 = A11 * A12
+	if (i == 0)
+	submult(A,n/2,A11_x1,A11_y1,A12_x1,A12_y1,A12_x1,A12_y1,false);
+
+	// Step 5:
+	// Propagate paths from V2 to V1:
+	// A21 = A21 * A11
+	if (i == 1)
+	submult(A,n/2,A21_x1,A21_y1,A11_x1,A11_y1,A21_x1,A21_y1,true);
+
+	// Step 6:
+	// Update paths to V2 via paths from V2 to V1 and back to V2
+	// A22 = min(A22, A21 * A12)
+	if (i == 2)
+	submult(A,n/2,A21_x1,A21_y1,A12_x1,A12_y1,A22_x1,A22_y1,true);
+	}
+
+	// Step 7:
+	// Recurse on A22:
+	APSP(A, n/2, A22_x1, A22_y1, A22_x2, A22_y2);
+
+
+	#pragma omp parallel for
+	for (int i = 0; i < 3; i++) {
+	// Step 8:
+	// Find shortest paths from V2 to V1:
+	// A21 = A22 * A21	
+	if (i == 0)
+	submult(A,n/2,A22_x1,A22_y1,A21_x1,A21_y1,A21_x1,A21_y1,false);
+	
+	// Step 9:
+	// Find shortest paths from V1 to V2:
+	// A12 = A12 * A22
+	if (i == 1)
+	submult(A,n/2,A12_x1,A12_y1,A22_x1,A22_y1,A12_x1,A12_y1,false);
+	
+	// Step 10:
+	// Find all pairs shortest paths for vertices in V1
+	// A11 = min(A11, A12*A21)
+	if (i == 2)
+	submult(A,n/2,A12_x1,A12_y1,A21_x1,A21_y1,A11_x1,A11_y1,true);
+	}
+	//print(A);
+}
+
+
+
 // Funtion that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
 void dijkstra(int graph[V][V], int src, int exits[V], int final_matrix[V][E])
@@ -173,6 +339,8 @@ void dijkstra(int graph[V][V], int src, int exits[V], int final_matrix[V][E])
 	sptSet[u] = 1;
 
 	// Update dist value of the adjacent vertices of the picked vertex.
+	
+ //  	#pragma omp parallel for
 	for (int v = 0; v < V; v++) {
 		// Don't look at other exit vertices:
 		if (exits[v] == 1 && v != src) continue;		
@@ -296,13 +464,18 @@ int main() {
         struct timeval time_start;
 	struct timeval time_end;
         long long execution_time;
+  
 	gettimeofday(&time_start, NULL);
-  
-  
+  	
    	#pragma omp parallel for
     	for(int i = 0; i< E; i++) {
         	dijkstra(graph, i, exits, final_matrix);
-        
+      
+	
+	////////////////////////       APSP instructions         /////////////////////
+	// To benchmark APSP uncomment this line and move the gettimeofday line above to above this comment
+	//APSP(graph,V,0,0,V-1,V-1);
+
        	//  for (int j =0 ;j< V;j++)
 	//         {
 	//             printf(" %d ", i);
@@ -317,7 +490,7 @@ int main() {
 
         execution_time = 1000000LL  * (time_end.tv_sec  - time_start.tv_sec) + (time_end.tv_usec - time_start.tv_usec);
        //printf("\n ENd %d %d", time_end.tv_sec, time_start.tv_sec);
-		 printf("\nTime: %lld %llds\n", execution_time, execution_time/1000000);
+	printf("\nTime: %lld %llds\n", execution_time, execution_time/1000000);
 	
 	//     for (int i = 0; i< V; i++)
 	//     {
