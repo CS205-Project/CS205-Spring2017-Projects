@@ -1,13 +1,12 @@
 Overview of tests:
 
 
-These tests are testing building evacuation of 1000-20000 people in a building using Dijkstra's algorithm
+These tests are for testing the building evacuation of 1000-20000 people using Dijkstra's algorithm
 to calculate the nearest exit for everyone and then using simulated annealing to move people to the 
-right exit to avoid congestion. It also uses MPI to communicate between threads for more efficient
-simulated annealing. 
+least congested exits. It also uses MPI to communicate between threads for parallel simulated annealing. 
 
-Note: all these tests run on 4 cores. You can change the number of cores in the
-build.sh file but then you also have to change the constant CORES in the dijkstra.c file.
+Note: all these tests run on 4 cores. You can modify the number of cores in the
+build.sh file followed by a change to the constant CORES in the dijkstra.c file.
 
 Arrangement of files:
 build_mpiX.sh is the build script for the test file with X people. It used dijkstraX.c to create
