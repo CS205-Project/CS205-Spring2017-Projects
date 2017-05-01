@@ -1,10 +1,46 @@
-EXECS=mpi_hello_world
-MPICC?=mpicc
+2 cores
+=========================
 
-all: ${EXECS}
+1000
+59709
 
-mpi_hello_world: mpi_hello_world.c
-	${MPICC} -o mpi_hello_world mpi_hello_world.c
+5000
+613885
 
-clean:
-	rm -f ${EXECS}
+
+10000
+1392421
+
+
+15000
+2724583
+
+20000
+4293281
+
+
+
+
+
+4 cores
+=========================
+
+1000
+44049
+
+5000
+526480
+
+
+10000
+1187873
+
+
+15000
+1984455
+
+20000
+3035048
+
+
+
