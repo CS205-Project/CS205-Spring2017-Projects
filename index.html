@@ -1,53 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CS205 Spring 2017 Project: Parallel MCMC</title>
-    <link href="/cs205-project/assets/css/style.css?v=068ad4ab58ecfbf6e07b1f15a08b9e90f5296d3e" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container markdown-body">
-      <h1 id="cs205-spring-2017-project-parallel-mcmc">CS205 Spring 2017 Project: Emergency Evacuation Strategy for a building</h1>
-
-<p>Sonu Mehta, Tomas Gudmundsson, Dali Moghimi</p>
-
-<h2 id="background">Project Proposal</h2>
-     <h3> <a href = https://cs205-project.github.io/CS205-Spring2017-Projects/report.html > Link to Interim report</a></h3>
-<p>
-
-Consider the problem of an emergency evacuation of a city when a natural disaster occurs or there is an emerging terrorist threat. We can define the total evacuation time of a city as the time it takes for the last person to get outside of the city bounds. When everyone is trying to get out of the city at the same time roads and pathways become congested, and hence slowing down the total evacuation time.</p>
-
-  <br/>
-Let’s think about this problem in a computational way. We can look at the city as a matrix of squares where each square has a structure that stores how many people are in that square and if it is accessible and so on. We can set the value of each square in the matrix as follows:
-<br/>
-Square value [x]:	Meaning of value:<br/>
-P	:This square is occupied by P persons.<br/>
-X	:Inaccessible square, i.e. no one can walk or drive through this square.<br/>
-C	:Capacity of square. How many people can stay on this square.<br/>
-I	:How many people are coming in through this square in the next timestep.<br/>
-O	:How many people are exiting through this square in the next timestep.<br/>
-T	:The current time stamp of this square.<br/>
-<br/>
-Consider the case of evacuating Cambridge. In real life when there are emergency evacuations, everyone rushes in the direction they believe leads them out of the city in the shortest time. This is not very efficient since most people might choose to exit through Harvard bridge causing it to become congested and very few people choose to exit through the other bridges or go through Somerville. 
-<br/>
-We can think about this problem computationally as if there is an advisor outside the city who has a cell phone and keeps texting people inside the city to tell them in which direction they should go. We can write an (inefficient) sequential program to solve this problem by traversing the matrix in a spiral to the middle moving everyone one square closer to the exit where the advisor would sequentially text every person in each square. 
-<br/>
-A parallel program could solve this problem in a more efficient way. Assuming the computer would have enough cores, it could simultaneously check all the outermost squares of the matrix, and then move closer to the middle in every step. We can imagine this as having many advisors, each texting people in each layer of squares, moving closer to the middle when all squares in this layer are finished. 
-<br/>
-Let’s think about the time complexity of this problem and assume that the size of the matrix is NxN. For the sequential code is has to check every square in the spiral until it reaches the middle for a total time of NxN. Then it has to do this at most N/2 times to move everyone outside of the city (assuming no inaccessible squares) for a total time complexity of N^3 (for simulation with inaccessible squares we can estimate that it takes some factor of N, which is much smaller than N^2, iterations to get everyone out for the same time complexity).
-However, for the parallel code assuming we would have 4N number of processors it would take N/2 steps to check the outermost squares and repeating for all layers of squares until we reach the middle element. We would have to repeat this process at most N/2 number of times for a total time complexity of N^2.
-<br/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS205 Spring 2017 Project: Emergency Evacuation Strategy for a building</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<div id="container">
+  <div id="header"> <a href="http://all-free-download.com/free-website-templates/">CS205 Project: Emergency Evacuation Strategy for a building</a> </div>
+  <div id = "h2" align = center> Sonu Mehta, Tomas Gudmundsson, Dali Moghimi</div>
+  <div id= "menu"> <a href="http://all-free-download.com/free-website-templates/">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">INITIAL PROPOSAL</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">PERFORMACE PLOTS</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">FUTURE WORK</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">REFERENCES</a> </div>
+  <div id = "titles"> Introduction and Motivation </div>
+  <div id="main">    
+At present, the modern buildings tend to be large-scale, multifunctional and complex with multiple exits.
+Emergency evacuation, which drives a mass movement of people disasterimpacted
+areas to safe areas, has been a complex problem ever since. If the evacuation can’t be effectively finished in the
+limited time, it will result the unnecessary casualties. So, setting up a safe and effective evacuation method is vital.
+In this project, we discuss about the evacuation strategy of a building by using shortest path algorithm.</p>
+    
+  </div>
   
-  <h3>
-     
-    Thoughts:</h3>
-We are very excited about this problem and believe we can simulate it for a large city like Cambridge using a matrix of structures as described above. Since the parallel code reduces the time complexity from N^3 to N^2 we are confident that we can achieve significant speedups using the multicore computers in Odyssey.
+<div id = "titles">Problem Description </div>
+<div id="main">    
+The objective is to find the most efficient and expedient routes to the building's exits for evacuees in an
+emergency situation.Concretely, we start with the  floor plan of a building. This plan is converted into a weighted, undirected
+graph with nodes equal to the sum of the number of occupants and exits available for each particular floor.
+The graph is a connected graph with edge weights representing the distance between two nodes. In the case of
+an emergency evacuation, the goal is to assign to each person the nearest exit whilst taking into account the
+congestion that may occur at these exits. Each exit has a specified capacity that must not be exceeded in order
+to safely evacuate the occupants. The algorithm is expected to output the optimal or near optimal assignment
+of evacuees to the exits such that the total cost is minimized. The total cost in this problem is defined as
+the sum of the distances of each person from their assigned exit and the penalty incurred for exceeding the
+capacity for a particular exit.
+ </div>  
+ 
+<div id = "titles"> Algorithms Used </div>
 
-     
-    </div>
-  </body>
+<div id = "sub-titles">1. Dijkstra Algorithm for shortest path + Simulated Annealing.</div>
+<div id="main">    
+We use Dijkstra Algorithm to find the shortest path to each exit from all the floor locations(representing an occupant).
+Once we have the distance to each exit for every occupant, we assign the nearest exit
+to each person and calculate the cost of the assignment. For now, we will assume that the congestion can only
+occur at the exits and that the edges do not have flow constraints, i.e., any number of occupants can pass freely
+along an edge at any given point in time. 
+  
+<p>Once the assignments to the nearest exits for each occupant are complete, we use simulated annealing to find
+the minimum cost configuration. After each iteration of the SA algorithm, we generate a new configuration
+by changing the exit assignment of one the occupants at random while the temperature is gradually reduced
+to zero. If the new assignment has a lower cost than the older assignment, the algorithm will accept the new
+configuration and if the cost is higher, the algorithm will only accept the new configuration with probability 
+= exp((newCost - oldCost))/T where T is the temperature. The algorithm converges to a minimum cost configuration 
+as the temperature is reduced the exit assignment of each person is the output of the program.</p>
+</div>    
+  
+<div id = "sub-titles"> Parallelization:</div>
+<div id="main">
+The above algorithm is sequential and calculates the shorted distance using Dijkstra one by one. As the graphs become larger,
+the computation time increases which reduces the purpose of the algorithm.
+To speed up the process, we use hybrid approach MPI+OpenMP to parallelize the algorithm.
+Since Dijkstra from one exit is not affected by another exit, we parallelize the algorithm by using OpenMP to calculate the
+shortest distance from all exits in parallel. Then we assign the nearest exit to each person and come up with an initial
+configuration. After that, for simulated annealing, instead of starting with 1 resultant configuration from Dijkstra, 
+we start with multiple initial configurations in parallel (using MPI). We run 10 epochs for each process in parallel for
+each temperature so that the process reaches equilibrium at that temperature. Then we synchronize all the processes until 
+they reach equilibrium and then they communicate with each other the best possible configuration at that temperature.
+This above approach repeats at each temperature until at the end we have the best solution from all the processes. 
+</div> 
+
+<div id = "sub-titles"> 2.APSP Algorithm + Simulated Annealing</div>
+
+<div id = "titles">Observations and Performance Evaluation</div>
+<div id="main">
+To evaluate the accuracy of the model, we used a few small randomly generated weighted graphs and manually evaluated
+the exit assignments for each occupant before and after simulated annealing(SA). We observe that the exit assignment after SA
+is the lowest cost assignment and the exits assigned to each person are closest taking into account the congestion.
+
+We evaluated the performance of the model by calculating execution time for serial and parallel run
+by changing the following parameters:
+1. No. of nodes + edges + exits
+2. No. of cores to be used for OpenMP
+3. No. of compute nodes to be used for MPI.
+
+We observe that difference in execution time of serial and parallel implementation is not significant for graphs of
+ small size  but, on increasing the number of nodes+edges+exits, the speedup is 2??Help times.
+Similarly on increasing the no. of cores for OpenMP, the speedup is increased but if the no. of cores are more than exits, 
+the speedup is not that significant.
+
+Similarly for Simulated Annealing, increasing the number of processes not only speeds up the process but there is 
+an additional advantage. At each temperature, the processes communicate to get the best configurations amonsgt them and 
+then proceed from there to get the best possible solution at the end.
+</div>
+The speedup,throughput and efficiency graphs are plotted below.
+
+
+
+<div id="footer"> &copy;2007 Keep it Simple &nbsp;<span class="separator">|</span>&nbsp; Design by <a href="http://www.realitysoftware.ca">Reality Software</a> </div>
+</div>
+<div align=center>This template  downloaded form <a href='http://all-free-download.com/free-website-templates/'>free website templates</a></div></body>
 </html>
-
 
 
