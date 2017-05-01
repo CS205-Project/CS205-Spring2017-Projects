@@ -3,7 +3,7 @@ Overview of tests:
 
 These tests are for testing the building evacuation of 1000-20000 people using Dijkstra's algorithm
 to calculate the nearest exit for everyone and then using simulated annealing to move people to the 
-least congested exits. It also uses MPI to communicate between threads for parallel simulated annealing. 
+least congested exits. It also uses MPI to communicate between threads for parallel runs of simulated annealing. 
 
 Note: all these tests run on 4 cores. You can modify the number of cores in the
 build.sh file followed by a change to the constant CORES in the dijkstra.c file.
