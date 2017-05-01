@@ -274,7 +274,7 @@ int main ( int argc, char *argv[] )
 	//printgraph(graph);
      	
      	if (PRINT) printf("\n Graph \n");
-     	file = fopen( "g.txt" , "r");
+     	file = fopen( "g10000.txt" , "r");
      
      	// Ignore first lines:
      	fscanf(file, "%s", str);
