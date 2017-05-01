@@ -7,11 +7,12 @@
 </head>
 <body>
 <div id="container">
-  <div id="header"> <a href="http://all-free-download.com/free-website-templates/">CS205 Project: Emergency Evacuation Strategy for a building</a> </div>
+  <div id="header"> <a href="Website.html">CS205 Project: Emergency Evacuation Strategy for a building</a> </div>
   <div id = "h2" align = center> Sonu Mehta, Tomas Gudmundsson, Dali Moghimi</div>
-  <div id= "menu"> <a href="http://all-free-download.com/free-website-templates/">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">INITIAL PROPOSAL</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">PERFORMACE PLOTS</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">FUTURE WORK</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://all-free-download.com/free-website-templates/">REFERENCES</a> </div>
+  <div id= "menu"> <a href="Website.html">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="initialproposal.html">INITIAL PROPOSAL</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="performanceplots.html">PERFORMACE PLOTS</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="futurework.html">FUTURE WORK</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="references.html">REFERENCES</a>
+  &nbsp; &nbsp; &nbsp; &nbsp; <a href="team.html">TEAM</a> </div>
   <div id = "titles"> Introduction and Motivation </div>
-  <div id="main">    
+  <div id="main">
 At present, the modern buildings tend to be large-scale, multifunctional and complex with multiple exits.
 Emergency evacuation, which drives a mass movement of people disasterimpacted
 areas to safe areas, has been a complex problem ever since. If the evacuation can’t be effectively finished in the
@@ -66,8 +67,19 @@ each temperature so that the process reaches equilibrium at that temperature. Th
 they reach equilibrium and then they communicate with each other the best possible configuration at that temperature.
 This above approach repeats at each temperature until at the end we have the best solution from all the processes. 
 </div> 
+<div id="PLOTS">
+	<img src="Dijkstra2vs4.png" alt="APSP">
+</div>
+
 
 <div id = "sub-titles"> 2.APSP Algorithm + Simulated Annealing</div>
+
+<div id="main">
+In order to get performance benchmarks for the building evacuation simulation using Dijkstra we decided to implement an recursive parallel tropical semi-ring all-pair-shortest-path (APSP) algorithm based on the Floyd-Warshall algorithm. We only parallelized the matrix calculations, since it's very difficult to parallelize the recursive calls in the algorithm. As the plot below shows this algorithm is much slower than the Dijkstra's algorithm for several reasons. First, the asymptotic complexity is higher, O(N^3) compared to (O(Nlog(N))) for dijkstra. Secondly, the recursion in the APSP algorithm is expensive and slows it down. Below are the performance results when this algorithm was run against the serial and parallel version of Dijkstra. It can be seen that even the serial version of Dijkstra outperforms this algorithm. For this algorithm to get closer to Dijkstra we would need to simulate a building evacuation with many more exits, but the highest number of exits we considered was 50.
+</div>
+<div id="PLOTS">
+	<img src="APSPvsDijkstra.png" alt="APSP">
+</div>
 
 <div id = "titles">Observations and Performance Evaluation</div>
 <div id="main">
@@ -77,26 +89,24 @@ is the lowest cost assignment and the exits assigned to each person are closest 
 
 We evaluated the performance of the model by calculating execution time for serial and parallel run
 by changing the following parameters:
-1. No. of nodes + edges + exits
-2. No. of cores to be used for OpenMP
-3. No. of compute nodes to be used for MPI.
+<ol type="1">
+  <li>No. of nodes + edges + exits</li>
+  <li>No. of cores to be used for OpenMP</li>
+  <li>No. of compute nodes to be used for MPI.</li>
+</ol>
 
 We observe that difference in execution time of serial and parallel implementation is not significant for graphs of
- small size  but, on increasing the number of nodes+edges+exits, the speedup is 2??Help times.
-Similarly on increasing the no. of cores for OpenMP, the speedup is increased but if the no. of cores are more than exits, 
-the speedup is not that significant.
+ small size  but, on increasing the number of nodes+edges+exits we achieve a better speedup (more plots are in the "Performance Plots" tab.
+Similarly on increasing the no. of cores for OpenMP, the speedup is increased but if the no. of cores are more than exits, the speedup is not that significant.
 
 Similarly for Simulated Annealing, increasing the number of processes not only speeds up the process but there is 
 an additional advantage. At each temperature, the processes communicate to get the best configurations amonsgt them and 
 then proceed from there to get the best possible solution at the end.
 </div>
-The speedup,throughput and efficiency graphs are plotted below.
 
-
-
-<div id="footer"> &copy;2007 Keep it Simple &nbsp;<span class="separator">|</span>&nbsp; Design by <a href="http://www.realitysoftware.ca">Reality Software</a> </div>
+<div id="footer">
 </div>
-<div align=center>This template  downloaded form <a href='http://all-free-download.com/free-website-templates/'>free website templates</a></div></body>
+</body>
 </html>
 
 
