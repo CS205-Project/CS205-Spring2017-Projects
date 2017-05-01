@@ -1,0 +1,714 @@
+============================
+testing with 1 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 279931us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 351156us 0s
+
+ Best solution 43617.089844
+============================
+testing with 2 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 142400us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 213788us 0s
+
+ Best solution 43617.089844
+============================
+testing with 4 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 71876us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 143858us 0s
+
+ Best solution 43617.089844
+============================
+testing with 8 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 36700us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 108063us 0s
+
+ Best solution 43617.089844
+============================
+testing with 16 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 37113us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 108453us 0s
+
+ Best solution 43617.089844
+============================
+testing with 32 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 42189us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 115624us 0s
+
+ Best solution 43617.089844
+============================
+testing with 64 threads
+Dijkstra has started calculating the nearest exit to everyone
+Dijkstra has finished calculating the nearest exit to everyone
+
+
+EXECUTION TIME OF DIJKSTRA: 60938us 0s
+Simulated annealing started
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+
+Simulated annealing found a new solution
+Simulated annealing has finished
+=================================================================================
+
+TOTAL EXECUTION TIME: 132271us 0s
+
+ Best solution 43617.089844

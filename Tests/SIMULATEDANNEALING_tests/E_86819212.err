@@ -1,0 +1,14 @@
+dijkstra1000.c: In function ‘submult’:
+dijkstra1000.c:175: warning: integer overflow in expression
+dijkstra1000.c:183: warning: integer overflow in expression
+dijkstra1000.c:183: warning: integer overflow in expression
+dijkstra1000.c:184: warning: integer overflow in expression
+dijkstra1000.c: In function ‘APSP’:
+dijkstra1000.c:250: warning: unused variable ‘A21_y2’
+dijkstra1000.c:249: warning: unused variable ‘A21_x2’
+dijkstra1000.c:245: warning: unused variable ‘A12_y2’
+dijkstra1000.c:244: warning: unused variable ‘A12_x2’
+dijkstra1000.c: In function ‘main’:
+dijkstra1000.c:444: warning: unused variable ‘dist’
+<built-in>: In function ‘submult’:
+dijkstra1000.c:219: warning: control reaches end of non-void function
