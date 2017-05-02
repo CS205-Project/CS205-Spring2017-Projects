@@ -2,7 +2,6 @@
 #include <limits.h>
 #include <string.h>
 
-
 int main()
 
 {
@@ -22,7 +21,7 @@ int main()
         
         
     }
-    printf("Hello World");
+    
     int adjacency_matrix[V][V];
     for (int i = 0; i < V ;i++)
     {
@@ -32,7 +31,7 @@ int main()
         }
         
     }
-    printf("Hello World");
+    
     int a, b, w;
     for(int i =0; i<E; i++)
     {
@@ -57,16 +56,16 @@ int main()
         {
             if(adjacency_matrix[i][j] == INT_MAX)
             {
-                //printf("\tInf,");
+                printf("\tInf,");
                 fprintf(file, "%s", " INT_MAX,");
             }
             else
             {
-                //printf("\t%d,",adjacency_matrix[i][j]);
+                printf("\t%d,",adjacency_matrix[i][j]);
                 fprintf(file, " %d,", adjacency_matrix[i][j]);
             }
         }
-       // printf("\n");
+        printf("\n");
         fprintf(file, "%s", "\n");
         
     }
@@ -81,7 +80,7 @@ int main()
             fscanf(file, "%s", str);
             if(strcmp("INT_MAX,", str)==0)
                 {
-                    //printf("\t%s", str);
+                    printf("\t%s", str);
                     new_matrix[i][j] = INT_MAX;
                     
                 
@@ -89,11 +88,11 @@ int main()
             else
             {
                 a = atoi(str);
-                //printf("\t%d, ",a);
+                printf("\t%d, ",a);
                 new_matrix[i][j] = a;    
             }
         }
-        //printf("\n");
+        printf("\n");
     
     }
     
