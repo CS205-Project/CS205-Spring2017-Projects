@@ -2,7 +2,7 @@ Overview of tests:
 
 These tests are for testing the building evacuation of 1000-20000 people using Dijkstra's algorithm
 to calculate the nearest exit for everyone and then using simulated annealing to move people to the 
-least congested exit. It uses MPI to communicate between threads for parallel runs of simulated annealing. 
+least congested exit. It runs a single thread for simulated annealing starting with nearest exit configuration.
 
 These test outputs focus on showing how simulated annealing works by improving the solution until it reaches
 an optimal solution.
