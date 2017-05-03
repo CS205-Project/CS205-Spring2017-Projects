@@ -34,7 +34,10 @@ of evacuees to the exits such that the total cost is minimized. The total cost i
 the sum of the distances of each person from their assigned exit and the penalty incurred for exceeding the
 capacity for a particular exit.
  </div>  
- 
+ <div id="PLOTS">
+	<img src="Html/img/plan.png" alt="Floor plan", height = "250">
+</div>
+
 <div id = "titles"> Algorithms Used </div>
 
 <div id = "sub-titles">1. Dijkstra Algorithm for shortest path + Simulated Annealing.</div>
@@ -43,9 +46,14 @@ We use Dijkstra Algorithm to find the shortest path to each exit from all the fl
 Once we have the distance to each exit for every occupant, we assign the nearest exit
 to each person and calculate the cost of the assignment. For now, we will assume that the congestion can only
 occur at the exits and that the edges do not have flow constraints, i.e., any number of occupants can pass freely
-along an edge at any given point in time. 
-  
-<p>Once the assignments to the nearest exits for each occupant are complete, we use simulated annealing to find
+along an edge at any given point in time. The problem with the above approach is that it might lead to congestion at exits. 
+So, to take it into account, we use simulated annealing (an optimization strategy) to come up with a low-cost configuration.
+
+<p> Simulated Annealing (SA) is an optimization strategy where we start with an intial configuration at a higher temperature.
+We propose a new state at each iteration and accept the state if its energy is lower that that of previous state. If the energy is higher
+, we accept it with a probability. We continue to decrease the temperature such that the solution converges at some low temperature.
+</p>
+<p>So for the above, once the assignments to the nearest exits for each occupant are complete, we use simulated annealing to find
 the minimum cost configuration. After each iteration of the SA algorithm, we generate a new configuration
 by changing the exit assignment of one the occupants at random while the temperature is gradually reduced
 to zero. If the new assignment has a lower cost than the older assignment, the algorithm will accept the new
@@ -54,7 +62,7 @@ configuration and if the cost is higher, the algorithm will only accept the new 
 as the temperature is reduced the exit assignment of each person is the output of the program.</p>
 </div>    
   
-<div id = "sub-titles"> Parallelization:</div>
+<div id = "sub-titles"> Parallelization(OpenMP + MPI):</div>
 <div id="main">
 The above algorithm is sequential and calculates the shorted distance using Dijkstra one by one. As the graphs become larger,
 the computation time increases which reduces the purpose of the algorithm.
@@ -66,9 +74,12 @@ we start with multiple initial configurations in parallel (using MPI). We run 10
 each temperature so that the process reaches equilibrium at that temperature. Then we synchronize all the processes until 
 they reach equilibrium and then they communicate with each other the best possible configuration at that temperature.
 This above approach repeats at each temperature until at the end we have the best solution from all the processes. 
+The advantage of SA with commuication is that it not only reduces the execution time but also helps to converge faster to the low-cost configuration.
 </div> 
 <div id="PLOTS">
-	<img src="Html/img/Dijkstra2vs4.png" alt="APSP">
+
+<img src="Html/img/SA2.png" alt="APSP" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="Html/img/Dijkstra2vs4.png" alt="APSP" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
 </div>
 
 
