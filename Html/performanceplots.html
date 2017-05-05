@@ -10,13 +10,25 @@
   <div id="header"> <a href="../index.html">CS205 Project: Emergency Evacuation Strategy for a building</a> </div>
   <div id = "h2" align = center> Sonu Mehta, Tomas Gudmundsson, Dali Moghimi</div>
   <div id= "menu"> <a href="../index.html">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="initialproposal.html">INITIAL PROPOSAL</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="performanceplots.html">PERFORMACE PLOTS</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="futurework.html">FUTURE WORK</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="references.html">REFERENCES</a>
-  &nbsp; &nbsp; &nbsp; &nbsp; <a href="team.html">TEAM</a> &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://github.com/CS205-Project/CS205-Spring2017-Projects">GITHUB</a></div>
+  &nbsp; &nbsp; &nbsp; &nbsp; <a href="team.html">TEAM</a> </div>
   <div id = "titles">Overview</div>
   <div id="main">    
   <p>
-  Below are performance plots of evacuation of 500-15000 people. These plots show time to calculate the evacuation, the speedup gained, and the efficiency. All of these simulations were run with 1,2,4,8,16,32,64 cores. From these plots we can see that the efficiency decreases as we increase the number of processors. However, we get close to linear speedup for 16 or less cores in most cases.
+  Below are performance plots of evacuation of 500-15000 people. These plots show time to calculate the evacuation, the speedup gained, and the efficiency. All of these simulations were run with 1,2,4,8,16,32 cores. From these plots we can see that the efficiency decreases as we increase the number of processors. However, we get close to linear speedup for 16 or less cores in most cases.
   </p>
  </div>
+
+ <div id="titles">
+ 	Simulated annealing (with MPI) speedup graphs
+ </div>
+ <div id="main">
+ 1. The first plot shows the comparison of execution time of Simulated annealing in serial and parallel version.
+ 	We observe that , as we increase the no. of initial simulated annealing configurations, serial version is much slower than parallel version.
+ 	<div class="space"><img src="img/SA2.png"></div>
+ 2. As we increase the processors, we also increase the parallel SA processes starting with different intial configurations. From the plot below, we observe that on increasing the no. of processes, the execution time per process decreases which shows that communication within SA helps to converge faster.
+ 	<div class="space" ><img src="img/SA3.png"></div>
+ </div>
+
 
 
  <div id="titles">
